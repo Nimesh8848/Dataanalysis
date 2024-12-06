@@ -7,6 +7,15 @@ select dem.employee_id,age,salary,occupation
 from employee_demographics as dem
 Inner Join employee_salary as sal
 	on dem.employee_id= sal.employee_id;
+    
+#innerjoinpart2--
+select sal.first_name, sal.last_name,sal.occupation,sal.dept_id
+from employee_demographics as dem
+Inner Join employee_salary as sal
+	on dem.employee_id= sal.employee_id
+ Inner Join parks_departments pd
+  on sal.dept_id =pd.department_id;
+
 #leftjoin
 select *
 from employee_demographics as dem
