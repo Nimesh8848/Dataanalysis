@@ -23,3 +23,12 @@ END $$
 DELIMITER ;
 
 call large_salaries2();
+
+Delimiter $$
+create procedure new_procedure(employee int)
+begin
+	select first_name,last_name,salary from employee_salary
+    where employee_id= employee;
+end $$
+Delimiter ;
+call new_procedure(1);
