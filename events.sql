@@ -6,6 +6,6 @@ begin
 	delete
     from employee_demographics
     where age>=60;
-end $$
+end $$	
 delimiter ;
 select * from employee_demographics;
