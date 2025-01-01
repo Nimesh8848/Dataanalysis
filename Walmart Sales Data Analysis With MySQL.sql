@@ -91,5 +91,63 @@ FROM sales
 GROUP BY month_name 
 ORDER BY cogs;
 
+-- What product line had the largest revenue?
+select 
+  product_line,
+  sum(total) as total_revenue
+  from sales
+  group by product_line
+  order by total_revenue desc;
+  
+  -- What is the city with the largest revenue?
+  select 
+  city,
+  sum(total) as total_revenue
+  from sales
+  group by city
+  order by total_revenue desc;
+  
+ -- What product line had the largest VAT?
+select 
+  product_line,
+  AVG(tax_pct) as largestvat
+  from sales
+  group by product_line
+  order by largestvat desc;
+  
+  -- Fetch each product line and add a column to those product line showing "Good", "Bad". Good if its greater than average sales
+  select 
+  avg(quantity) as Average_sales
+  from sales;
+  
+  select product_line,
+  case
+	when avg(quantity)>5.4 then "Good"
+	else "Bad"
+  end as remarks
+  from sales
+  group by product_line;
+  
+  -- Which branch sold more products than average product sold?
+  select branch,
+  sum(quantity) as qty
+  from sales
+  group by branch
+  having qty>(select avg(quantity) from sales);
+  
+  
+-- What is the most common product line by gender
+select product_line,
+count(gender) as  total_count
+from sales
+group by product_line,gender
+order by total_count  desc;
+
+-- What is the average rating of each product line
+select product_line,
+Round(avg(rating),1) as Average_Rating
+from sales
+group by product_line;
 
 
+  
