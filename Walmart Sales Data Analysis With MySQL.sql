@@ -148,6 +148,71 @@ select product_line,
 Round(avg(rating),1) as Average_Rating
 from sales
 group by product_line;
+-- --------------------------------------------------------------------
+-- --------------------------------------------------------------------
+
+-- --------------------------------------------------------------------
+-- -------------------------- Customers -------------------------------
+-- --------------------------------------------------------------------
+
+-- How many unique customer types does the data have?
+select distinct customer_type from sales;
+
+-- How many unique payment methods does the data have?
+select distinct payment from sales;
+
+-- What is the most common customer type?
+select distinct customer_type
+,count(customer_type) as common from sales
+group by customer_type
+order by common desc;
+
+-- Which customer type buys the most?
+select distinct customer_type,
+count(*) from sales
+group by customer_type
+;
+
+-- What is the gender distribution per branch?
+SELECT 
+    gender, COUNT(gender) AS count
+FROM
+    sales
+WHERE
+    branch = 'B'
+GROUP BY gender;
+
+-- Which time of the day do customers give most ratings?
+select time_of_day,
+avg(rating) as Average_rating
+from sales
+group by time_of_day;
 
 
-  
+-- Which time of the day do customers give most ratings per branch?
+select time_of_day,
+avg(rating) as Average_rating
+from sales
+where branch='C'
+-- A and c are getting over all better ratings compared to B 
+group by time_of_day;
+
+-- What is the gender of most of the customers?
+select distinct gender,
+count(gender) as No_of_customer
+from sales
+group by gender;
+
+-- Which day fo the week has the best avg ratings?
+select distinct Day_Name,
+round(avg(rating),2) as Average_rating
+from sales
+group by Day_Name;
+
+-- Which day of the week has the best average ratings per branch?
+select distinct Day_Name,
+round(avg(rating),2) as Average_rating
+from sales
+where branch='B'
+group by Day_Name;
+
