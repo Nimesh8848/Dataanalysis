@@ -216,3 +216,40 @@ from sales
 where branch='B'
 group by Day_Name;
 
+-- --------------------------------------------------------------------
+-- --------------------------------------------------------------------
+
+-- --------------------------------------------------------------------
+-- -------------------------- Sales -------------------------------
+-- --------------------------------------------------------------------
+
+-- Number of sales made in each time of the day per weekday
+select time_of_day,
+count(*) as per_day_sale
+from sales
+where day_Name='Sunday'
+group by time_of_day
+order by per_day_sale desc;
+-- evening time the sale was better
+
+-- Which of the customer types brings the most revenue?
+select distinct customer_type,
+sum(total) as total_revenue from sales
+group by customer_type
+order by total_revenue desc;
+
+-- Which city has the largest tax percent/ VAT (Value Added Tax)
+ select distinct city
+ , sum(tax_pct) as Tax
+ from sales
+ group by city
+ order by Tax desc;
+ 
+ -- Which customer type pays the most in VAT?
+ select distinct customer_type
+ ,sum(tax_pct) as Tax
+ from sales
+ group by customer_type
+ order by Tax Desc ;
+
+
